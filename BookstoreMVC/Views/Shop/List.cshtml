@@ -1,0 +1,79 @@
+﻿@using MvcSiteMapProvider.Web.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+@Html.Action("BookTypeMenu")
+@Html.MvcSiteMap().SiteMapPath()
+
+    <form id="search-form" method="get" data-ajax="true" data-ajax-target="#booklist-section">
+        <input id="search-filter" type="search" name="searchQuery"
+                   data-autocomplete-source="@Url.Action("BooksSuggestions")"
+                   placeholder="Wprowadź tekst..." />
+            <input type="submit" value="" />
+    </form>
+
+
+
+<hr />
+@Html.Partial("_BookList")
+
+
+
+@section ScriptsBottom {
+    
+    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+    @*<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>*@
+    <script src="~/scripts/jquery-ui-1.12.1.js"></script>
+    <script>
+
+        $(function () {
+
+            var setupAutoComplete = function () {
+
+                var $input = $(this);
+
+                var options = {
+
+                    source: $input.attr("data-autocomplete-source"),
+                    select: function (event, ui) {
+                        $input = $(this);
+                        $input.val(ui.item.label);
+                        var $form = $input.parents("form:first");
+                        $form.submit();
+                    }
+                };
+                $input.autocomplete(options);
+            };
+
+            var ajaxSubmit = function () {
+
+                var $form = $(this);
+
+                var settings = {
+                    data: $(this).serialize(),
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method")
+                };
+
+                $.ajax(settings).done(function(result)
+                    {
+                        var $targetElement = $($form.data("ajax-target"));
+                        var $newContent = $(result);
+                        $($targetElement).replaceWith($newContent);
+                        $newContent.effect("slide");
+                    });
+
+                return false;
+            }
+
+            $("#search-filter").each(setupAutoComplete);
+            $("#search-form").submit(ajaxSubmit);
+
+        });
+
+    </script>
+    
+    }

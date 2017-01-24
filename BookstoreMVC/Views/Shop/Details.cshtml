@@ -1,0 +1,25 @@
+﻿@model BookstoreMVC.Models.Book
+@using BookstoreMVC.Infrastructure
+@using MvcSiteMapProvider.Web.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+@Html.Action("BookTypeMenu")
+
+@Html.MvcSiteMap().SiteMapPath()
+<hr />
+
+<h2>@Model.Title - @Model.AuthorName</h2>
+
+<img src="@Url.BookCoverPath(Model.ImageFileName)" />
+<br />
+<span style="font-size: 2.0rem;">Cena: @Model.Price zł</span>
+
+<p>@Model.Description</p>
+
+<a style="color:black; font-size: 5rem;" href="@Url.Action("AddToCart", "Cart", new { id = Model.BookID })">Dodaj Do Koszyka</a>

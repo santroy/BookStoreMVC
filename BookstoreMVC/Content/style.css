@@ -1,0 +1,180 @@
+@import "reset.css";
+
+@font-face {  
+    font-family: 'Kaushan Script';
+    src: url('../Content/KaushanScript-Regular.ttf');  
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Kaushan Script', serif;
+}
+
+.search-field {
+
+    position: relative;
+
+}
+
+table td {
+    padding: 20px;
+}
+
+table {
+    background-color: aliceblue;
+}
+
+.header-title, .cart-header-link {
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 3.6rem;
+    display: block;
+    background-color: #046380;
+    color: white;  
+
+}
+
+    #login-header, .cart-header-link a {
+        padding: 10px;
+    }
+
+.hidden {
+    visibility: hidden;
+}
+
+
+h2 {
+    font-size: 3.0rem;
+    padding: 1.0rem;
+}
+
+.header-title {
+    text-align: center;
+    float: left;
+    width: 50%;
+    margin-bottom: 2.5rem;
+}
+
+.cart-header-link {
+    float: right;
+    text-align: right;
+}
+
+.header-logo {
+    clear: both;
+    text-align: center;
+}
+
+section {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 3rem;
+    color: black;
+}
+
+article {
+    display: inline-block;
+    width: 800px;
+    font-size: 2.0rem;
+    text-align: justify;
+}
+
+.vertical-menu {
+    font-size: 1.6rem;
+    display: inline-block;
+    width: 200px;
+    float: left;
+    background-color: #A7A37E;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+
+
+
+footer, .horizonstal-menu {
+    margin-top: 2.5rem;
+    display: block;
+    font-size: 2.5rem;
+    width: 100%;
+    background-color: #A7A37E;
+    height: 5.0rem;
+}
+
+
+.copyright {
+    float: right;
+    padding: 1.2rem;
+}
+
+footer ul {
+        list-style-type: none;
+}
+
+footer li, .horizonstal-menu li {
+    display: inline-block;
+    float: left;
+    padding: 1.2rem;
+}
+
+footer {clear: both;}
+.grid li {
+     position: relative;
+     float: left;
+     padding: 5px;
+     list-style: none;
+     z-index: 5;
+}
+
+.newflag {
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    color: white;
+    height: 50px;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 5px;
+    z-index: 10;
+}
+
+.CartCover {
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    color: white;
+    height: 50px;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 5px;
+    z-index: 10;
+}
+
+
+a:visited {
+    color: black;
+}
+
+a{ color: black;
+   text-decoration: none;
+}
+
+.grid li h2 {
+     text-shadow: 2px 2px black;
+     color: white;
+     font-size: 1.8rem;
+     position: absolute;
+     top: 35%;
+}
+
+.horizonstal-menu {
+    height: 7rem;
+}
+
+.typeIcon {
+    height:24px;
+}
+
+    .CartCover a, .CartCover a:visited {
+        color: white;
+    }

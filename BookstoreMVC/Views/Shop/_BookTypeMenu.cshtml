@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BookstoreMVC.Models.BookType>
+@using BookstoreMVC.Infrastructure
+
+<nav class="vertical-menu">
+    <ul>
+        @foreach (var booktype in Model)
+        {
+        <li>
+            <div class="typeIcon" style="background: url(@Url.BookCoverPath(booktype.IconFileName)) no-repeat "></div>
+            <a href="@Url.Action("List", "Shop", new { booktype = booktype.Name.ToString()})" style="">
+                @booktype.Name
+            </a>
+        </li>
+        }
+    </ul>
+</nav>

@@ -1,0 +1,99 @@
+﻿@model BookstoreMVC.ViewModels.CartViewModel
+@using MvcSiteMapProvider.Web.Html
+@using MvcSiteMapProvider.Web.Html.Models
+@using BookstoreMVC.Infrastructure
+
+
+
+
+@{
+    ViewBag.Title = "Koszyk";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+@Html.Action("BookTypeMenu", "Shop")
+@Html.MvcSiteMap().SiteMapPath()
+
+
+<table id="cart-table">
+    @foreach (var cartItem in Model.CartItems)
+    {
+        <tr id="cart-row-@cartItem.Book.BookID">
+            <td>
+                <a href="@Url.Action("Details", "Shop", new { id = cartItem.Book.BookID })">
+                    <img src="@Url.Content(Url.BookCoverPath(cartItem.Book.ImageFileName))" />
+                </a>
+            </td>
+            <td><a href="@Url.Action("Details", "Shop", new { id = cartItem.Book.BookID })">@cartItem.Book.Title</a></td>
+            <td>Ilość: <span id="cart-item-count-@cartItem.Book.BookID">@cartItem.Quantity</span></td>
+            <td>@String.Format("{0:0.##}", cartItem.TotalPrice) zł</td>
+            <td><a class="removeProduct" data-id="@cartItem.Book.BookID" href="#">Usuń</a></td>
+        </tr>
+    }
+
+    <tr id="cart-empty-message" @if (Model.CartItems != null && Model.CartItems.Count > 0) { <text> class="hidden" </text> }>
+        <td>Twój koszyk jest pusty.</td>
+    </tr>
+</table>
+<hr />
+<div id="total-price">
+    Razem: <span id="total-price-value">@String.Format("{0:0.##}", Model.TotalPrice)</span> zł
+</div>
+
+<div class="section-button-container">
+
+    <a class="button-link" href="">Kontynuuj zakupy</a>
+    @if (Model.TotalPrice > 0)
+    {
+    <br />
+    <a class="button-link" id="cart-button-checkout" href="@Url.Action("Checkout", "Cart")">Zapłać</a>
+    }
+    </div>
+
+@section ScriptsBottom {
+    
+@System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+
+  <script type="text/javascript">
+
+    $(function () {
+        $(".removeProduct").click(function () {
+
+            var recordToDelete = $(this).attr("data-id");
+
+            if (recordToDelete != '') {
+
+                // Send post request with AJAX
+                $.post("/Cart/RemoveFromCart", { "bookID": recordToDelete },
+                    function (response) {
+                        // Success
+                        if (response.RemovedItemCount == 0) {
+
+                            $('#cart-row-' + response.RemoveItemId).fadeOut('slow', function () {
+                                if (response.CartItemsCount == 0) {
+                                    $("#cart-empty-message").removeClass("hidden");
+                                }
+                            });
+                        } else {
+                            $('#cart-item-count-' + response.RemoveItemId).text(response.RemovedItemCount);
+                        }
+
+                        if (response.CartItemsCount == 0) {
+                            $('#cart-button-checkout').addClass('hidden');
+                            $('#total-price').addClass('invisible');
+                        }
+
+                        $('#total-price-value').text(response.CartTotal);
+                        $('#cart-header-items-count').text(response.CartItemsCount);
+
+                    });
+
+                return false;
+            }
+        });
+
+    });
+
+</script>
+    
+    }

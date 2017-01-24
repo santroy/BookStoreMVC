@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Start" controller="Home" action="Index">
+    <mvcSiteMapNode title="BookType" controller="Shop" action="List" dynamicNodeProvider="BookstoreMVC.Infrastructure.ProductListDynamicNodeProvider, BookstoreMVC">
+    <mvcSiteMapNode title="Book" controller="Shop" action="Details" dynamicNodeProvider="BookstoreMVC.Infrastructure.ProductDetailsDynamicNodeProvider, BookstoreMVC"></mvcSiteMapNode>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

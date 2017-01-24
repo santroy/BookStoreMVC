@@ -1,0 +1,15 @@
+﻿@using MvcSiteMapProvider.Web.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+@{
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+@Html.Action("BookTypeMenu", "Shop")
+@Html.MvcSiteMap().SiteMapPath()
+
+@RenderBody()
+
+@section ScriptsBottom {
+    @RenderSection("ScriptsBottom", required: false)
+    }

@@ -1,0 +1,61 @@
+﻿@model BookstoreMVC.ViewModels.HomeViewModel
+@using BookstoreMVC.Infrastructure
+@{
+    ViewBag.Title = "Strona główna";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+<nav class="horizonstal-menu">
+    <ul>
+        @foreach (var bookType in Model.BookTypes)
+        {
+            <li>
+                <div class="typeIcon" style="background: url(@Url.BookCoverPath(bookType.IconFileName)) no-repeat center"></div>
+                <a href="@Url.Action("List", "Shop", new { booktype = bookType.Name.ToLower() })">@bookType.Name</a>
+            </li>
+        }
+    </ul>
+</nav>
+
+    <article>
+        <div class="grid">
+            <ul>
+                @foreach (var newBooks in Model.NewBooks)
+                {
+                    <li>
+                        <div class="cover_main">
+                            <h2>@newBooks.AuthorName <br /> @newBooks.Title</h2>
+                            <a class="cover_link" href="@Url.Action("Details", "Shop", new { id = newBooks.BookID} )">
+                                <img src="@Url.BookCoverPath(newBooks.ImageFileName)" title="@newBooks.Title" />
+                            </a>
+                            <div class="newflag">
+                                Nowość!
+                            </div>
+                            <div class="CartCover">
+                                <a href="@Url.Action("AddToCart", "Cart", new { id = newBooks.BookID })">Dodaj Do Koszyka</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                @foreach (var bestsellers in Model.Bestsellers)
+                {
+                    <li>
+                        <div class="cover_main">
+                            <h2>@bestsellers.AuthorName <br /> @bestsellers.Title</h2>
+                            <a class="cover_link" href="@Url.Action("Details", "Shop", new { id = bestsellers.BookID} )">
+                                <img src="@Url.BookCoverPath(bestsellers.ImageFileName)" title="@bestsellers.Title" />
+                            </a>
+                            <div class="newflag">
+                                BestSeller!
+                            </div>
+                            <div class="CartCover">
+                                <a href="@Url.Action("AddToCart", "Cart", new { id = bestsellers.BookID })">Dodaj Do Koszyka</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </article>
+

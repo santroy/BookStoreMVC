@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BookstoreMVC.Models.Book>
+@using BookstoreMVC.Infrastructure
+
+    <div class="grid"
+
+<div id="booklist-section">
+     <ul class="bookgrid">
+             @foreach (var book in Model)
+             {
+
+                 <li>
+
+
+                     <div class="cover_main">
+                         <h2>@book.AuthorName <br /> @book.Title</h2>
+                         <a class="cover_link" href="@Url.Action("Details", "Shop", new { id = book.BookID} )">
+                             <img src="@Url.BookCoverPath(book.ImageFileName)" title="@book.Title" />
+                         </a>
+                         @if (book.IsBestseller)
+                         {
+                             <div class="newflag">BestSeller!</div>
+                         }
+                         <div class="CartCover">
+                             <a href="@Url.Action("AddToCart", "Cart", new { id = book.BookID })">Dodaj Do Koszyka</a>
+                         </div>
+                     </div>
+
+
+                 </li>
+
+             }
+
+</ul>
+
+</div>
+</div>

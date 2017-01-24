@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/auth-buttons.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
+    @System.Web.Optimization.Styles.Render("~/Content/themes/base/css")
+
+</head>
+<body>
+
+    <header>
+        <h1 class="header-title">Bookstore Capital</h1>
+        <div class="cart-header-link">
+            <a href="@Url.Action("Index", "Cart")">Koszyk <span id="cart-header-items-count">(@Html.Action("GetCartItemsCount", "Cart"))</span></a>
+
+            @Html.Partial("_LoginPartial")
+
+        </div>
+
+        <div class="header-logo">
+            <a href="@Url.Content("~/")">
+                <img src="../Content/Images/logo.png" />
+            </a>
+        </div>
+    </header>
+
+
+    <section>
+        @RenderBody()
+    </section>
+
+
+
+    <footer>
+        <div>
+
+            <ul>
+                <li><a href="@Url.Content("~/")">Strona główna</a></li>
+                <li>@Html.ActionLink("O nas", "StaticContent", "Home", new { viewname = "Onas" }, null)</li>
+                <li>@Html.ActionLink("Regulamin", "StaticContent", "Home", new { viewname = "Regulamin" }, null)</li>
+                <li>@Html.ActionLink("Kontakt", "StaticContent", "Home", new { viewname = "Kontakt" }, null)</li>
+            </ul>
+
+        </div>
+
+        <span class="copyright">
+            Copyright &copy; @System.DateTime.Now.Year Bookstore Capital
+        </span>
+
+    </footer>
+
+
+    @RenderSection("ScriptsBottom", required: false)
+</body>
+</html>
